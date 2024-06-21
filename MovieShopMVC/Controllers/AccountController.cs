@@ -3,7 +3,7 @@ using Infrastructure.Servies;
 
 namespace MovieShopMVC.Controllers
 {
-    public class Account : Controller
+    public class AccountController : Controller
     {
         public IActionResult Login()
         {
