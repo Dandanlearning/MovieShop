@@ -28,5 +28,8 @@ namespace ApplicationCore.Entities
         public string? UpdatedBy { get; set; }
         public string? CreatedBy { get; set; }
         public decimal? Rating { get; set; }
+
+        // Navigation Property is gonna be collection of trailers
+        public ICollection<Trailer> Trailers { get; set; }
     }
 }
