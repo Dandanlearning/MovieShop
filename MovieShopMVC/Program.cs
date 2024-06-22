@@ -1,5 +1,7 @@
+using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Contracts.Services;
 using Infrastructure.Data;
+using Infrastructure.Repositories;
 using Infrastructure.Servies;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,18 +20,16 @@ namespace MovieShopMVC
             //this is telling the container to inject movieservice class
             // where imovieservice interface is
             builder.Services.AddScoped<IMovieService, MovieService>();
-            //if controllername == home then for IMovieService use MovieService
-            //else controller Name == Movie then use MovieServiceMock
+            builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+            ////if controllername == home then for IMovieService use MovieService
+            ////else controller Name == Movie then use MovieServiceMock
 
 
-            //inject the connection string to our DbContext by reading from appsettings.json file
+            ////inject the connection string to our DbContext by reading from appsettings.json file
             builder.Services.AddDbContext<MovieShopDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MovieShopDbConnection"));
             });
-
-
-
 
             var app = builder.Build();
 

@@ -47,10 +47,6 @@ namespace MovieShopMVC.Controllers
             // although _movieService is an interface instance
             var movies = _movieService.GetTop30GrossingMovies();
             return View(movies);
-
-
-
-            return View();
         }
 
         public IActionResult Privacy()
@@ -68,7 +64,7 @@ namespace MovieShopMVC.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

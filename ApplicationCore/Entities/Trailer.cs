@@ -9,8 +9,8 @@ namespace ApplicationCore.Entities
     public class Trailer
     {
         public int Id { get; set; }
-        public string TrailerUrl { get; set; }
-        public string Name { get; set; }
+        public string? TrailerUrl { get; set; }
+        public string? Name { get; set; }
 
         // reference to movie Id as Foreign Key FK
         public int MovieId { get; set; }
