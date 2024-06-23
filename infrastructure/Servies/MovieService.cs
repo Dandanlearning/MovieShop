@@ -18,6 +18,11 @@ namespace Infrastructure.Servies
             _movieRepository = movieRepository;
         }
 
+        public MovieDetailsModel GetMovieDetails(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<MovieCardModel> GetTop30GrossingMovies()
         {
             // call MovieRepository(call the database with Dapper or EF Core)
