@@ -25,7 +25,9 @@ namespace Infrastructure.Repositories
         public override Movie GetById(int id)
         {
             // we need to use include method: is to include navigation property
-            var movieDetails = _dbContext.Movies.Include(m => m.Genres).ThenInclude(m => m.Genre).Include(m => m.Trailers)
+            var movieDetails = _dbContext.Movies.Include(m => m.Genres).ThenInclude(m => m.Genre)
+                .Include(m => m.MovieCasts).ThenInclude(m => m.Cast)
+                .Include(m => m.Trailers)
                 .FirstOrDefault(m => m.Id == id);
             return movieDetails;    
         }
