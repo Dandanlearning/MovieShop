@@ -32,5 +32,6 @@ namespace ApplicationCore.Entities
         // Navigation Property is gonna be collection of trailers
         public ICollection<Trailer> Trailers { get; set; }
         public ICollection<MovieGenre> Genres { get; set; }
+        public ICollection<MovieCast> MovieCasts { get; set; }
     }
 }
