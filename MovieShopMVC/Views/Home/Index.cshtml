@@ -17,11 +17,7 @@
                     @* mb-4 will leave some space for cards
                         fluid is like zoom in the img
                     *@
-                    <div class="card mb-4">
-                        <a asp-action="Details" asp-controller="Movies" asp-route-id="@movie.Id">
-                            <img src="@movie.PosterUrl" alt="@movie.Title" class="img-fluid"/>
-                        </a>
-                    </div>
+                       <partial name="_MovieCard" model="movie"></partial>
                 </div>
             }
         </div>

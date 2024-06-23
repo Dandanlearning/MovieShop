@@ -17,8 +17,10 @@ namespace MovieShopMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Details(int id)
         {
+            // Movie service with details
+            // pass movie details to view
 
             return View();
         }

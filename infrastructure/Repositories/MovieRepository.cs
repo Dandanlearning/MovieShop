@@ -22,5 +22,12 @@ namespace Infrastructure.Repositories
             var movies = _dbContext.Movies.OrderByDescending(x => x.Revenue).Take(30);
             return movies;
         }
+        public override Movie GetById(int id)
+        {
+            // we need to use include method: is to include navigation property
+            var movieDetails = _dbContext.Movies.Include(m => m.Genres).ThenInclude(m => m.Genre).Include(m => m.Trailers)
+                .FirstOrDefault(m => m.Id == id);
+            return movieDetails;    
+        }
     }
 }
