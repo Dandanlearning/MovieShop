@@ -16,19 +16,19 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public IEnumerable<Movie> GetTop30RevenueMovies()
+        public async Task<IEnumerable<Movie>> GetTop30RevenueMovies()
         {
             //get top 30 movies by revenue
-            var movies = _dbContext.Movies.OrderByDescending(x => x.Revenue).Take(30);
+            var movies = await _dbContext.Movies.OrderByDescending(x => x.Revenue).Take(30).ToArrayAsync();
             return movies;
         }
-        public override Movie GetById(int id)
+        public override Task<Movie> GetById(int id)
         {
             // we need to use include method: is to include navigation property
             var movieDetails = _dbContext.Movies.Include(m => m.Genres).ThenInclude(m => m.Genre)
                 .Include(m => m.MovieCasts).ThenInclude(m => m.Cast)
                 .Include(m => m.Trailers)
-                .FirstOrDefault(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             return movieDetails;    
         }
     }

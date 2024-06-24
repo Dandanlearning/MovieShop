@@ -18,9 +18,9 @@ namespace Infrastructure.Servies
             _movieRepository = movieRepository;
         }
 
-        public MovieDetailsModel GetMovieDetails(int id)
+        public async Task<MovieDetailsModel> GetMovieDetails(int id)
         {
-            var movie = _movieRepository.GetById(id);
+            var movie = await _movieRepository.GetById(id);
             var movieDetails = new MovieDetailsModel 
             { 
                 Id = movie.Id,Price = movie.Price, Budget = movie.Budget, Overview = movie.Overview,
@@ -63,10 +63,10 @@ namespace Infrastructure.Servies
             return movieDetails;
         }
 
-        public List<MovieCardModel> GetTop30GrossingMovies()
+        public async Task<List<MovieCardModel>> GetTop30GrossingMovies()
         {
             // call MovieRepository(call the database with Dapper or EF Core)
-            var movies = _movieRepository.GetTop30RevenueMovies();
+            var movies = await _movieRepository.GetTop30RevenueMovies();
             var moviecards = new List<MovieCardModel>();
 
             // mapping entities data into  models data

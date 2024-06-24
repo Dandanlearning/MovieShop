@@ -12,7 +12,7 @@ namespace ApplicationCore.Contracts.Services
     {
         //have all the business logic methods relating to movies
         //go to see the page, and think about what kind of methods you  need
-        List<MovieCardModel> GetTop30GrossingMovies();
-        MovieDetailsModel GetMovieDetails(int id);
+        Task<List<MovieCardModel>> GetTop30GrossingMovies();
+        Task<MovieDetailsModel> GetMovieDetails(int id);
     }
 }

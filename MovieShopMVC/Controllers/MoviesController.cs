@@ -17,11 +17,14 @@ namespace MovieShopMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             // Movie service with details
             // pass movie details to view
-            var movieDetails = _movieService.GetMovieDetails(id);
+
+            // this is going to get data from remote database, and runtime is unknow
+            // time can be effected by network speed time, sql server memory(whether it is busy)
+            var movieDetails = await _movieService.GetMovieDetails(id);
 
             return View(movieDetails);
         }
