@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ApplicationCore.Models;
 
 namespace Infrastructure.Repositories
 {
@@ -31,5 +32,37 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(m => m.Id == id);
             return movieDetails;    
         }
+
+        public async Task<PagedResultSet<Movie>> GetMoviesByGenres(int genreId, int pageSize=30, int pageNumber=1)
+        {
+            // 1. get total movies count from the genre you want
+            // select count(*) from genre where genreid = 1
+            // in LINQ
+            // my code: var totalMoviesCount = await _dbContext.Genres.CountAsync(g => g.Id == genreId);
+            var totalMoviesCountByGenre = await _dbContext.MovieGenres.Where(m => m.GenreId == genreId).CountAsync();
+
+            // 2. get the actual movies from movieGenres and movie table
+            if (totalMoviesCountByGenre == 0)
+            {
+                throw new Exception("No Movie Found for that genre");
+            }
+            // after Where, it is still moviegenre type. 
+            var movies = await _dbContext.MovieGenres.Where(m => m.GenreId == genreId).Include(m => m.Movie)
+                .OrderBy(m => m.MovieId)
+                .Select(m => new Movie
+                {
+                    Id = m.MovieId,
+                    PosterUrl = m.Movie.PosterUrl,
+                    Title = m.Movie.Title
+                })
+                .Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            // ^^for above statement, you must use order by function for skip and take.
+            // because in sql, order by and offset statement should go together.
+
+            var pagedMovies = new PagedResultSet<Movie> (movies, pageNumber, pageSize, totalMoviesCountByGenre);
+
+        }
+
     }
 }
