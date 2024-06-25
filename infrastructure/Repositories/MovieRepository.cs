@@ -61,7 +61,7 @@ namespace Infrastructure.Repositories
             // because in sql, order by and offset statement should go together.
 
             var pagedMovies = new PagedResultSet<Movie> (movies, pageNumber, pageSize, totalMoviesCountByGenre);
-
+            return pagedMovies;
         }
 
     }

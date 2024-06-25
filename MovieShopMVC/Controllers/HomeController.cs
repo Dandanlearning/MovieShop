@@ -32,7 +32,7 @@ namespace MovieShopMVC.Controllers
         
         
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             // our controllers are very thin/lean
             // most of your logic should come from other dependencies, services
@@ -45,7 +45,7 @@ namespace MovieShopMVC.Controllers
             // my model data
             // this method will implement the method in class MovieService
             // although _movieService is an interface instance
-            var movies = _movieService.GetTop30GrossingMovies();
+            var movies = await _movieService.GetTop30GrossingMovies();
             return View(movies);
         }
 
