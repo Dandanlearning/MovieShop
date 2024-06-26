@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Contracts.Services;
+using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MovieShopMVC.Controllers
@@ -29,10 +30,10 @@ namespace MovieShopMVC.Controllers
             return View(movieDetails);
         }
         [HttpGet]
-        public async Task<IActionResult> Genres(int id, int pageSize=30, int pageNumber = 1)
+        public async Task<IActionResult> Genres(int id, int pageSize = 30, int pageNumber = 1)
         {
             var pagedMovies = await _movieService.GetMoviesByGenrePagination(id, pageSize, pageNumber);
-            return View();
+            return View("PagedMovies",pagedMovies);
         }
     }
-}
+    }

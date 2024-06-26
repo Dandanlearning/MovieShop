@@ -26,4 +26,12 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Movies\PagedMovies.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Movies\PagedMovies.cshtml" />
+  </ItemGroup>
+
 </Project>
